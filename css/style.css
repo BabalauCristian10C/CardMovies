@@ -1,0 +1,118 @@
+body {
+    background-color: antiquewhite !important;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.header {
+    background-color: rgb(138, 120, 97);
+    position:fixed !important;
+    width: 100%!important;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:4em;
+    z-index: 20!important;
+    margin-bottom:100px
+}
+.preloader{
+    z-index: 35!important;
+}
+
+.preloaderPage {
+    opacity:1;
+    width:100%;
+    height: 100vh;
+    z-index: 30;
+    position:absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: indianred !important;
+}
+
+select {
+    margin: 0.3em !important;
+    border:none;
+    border-radius: 0px;
+    text-align: center;
+    max-width: 200px !important;
+}
+.mainPage{
+    margin-top:150px;
+}
+
+.card {
+    background-color:rgba(100, 100, 100, 0.5);
+    height: 30em;
+    border: 1.5px solid white;
+    border-radius:20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    transform: rotateY(0deg);
+    transition: all 1s;
+}
+
+span{
+    line-height: 15px;
+    width: 100%;
+    max-width: 400px;
+    display:inline-block;
+}
+
+.spanTitle h4{
+    color:tan !important;
+    margin-bottom:0px !important;
+    font-weight: 400!important;
+    font-size:1.1em!important;
+}
+
+.spanTitle{
+    line-height: 15px;
+    color:white;
+    font-weight: 400;
+    font-size:0.8em;
+}
+.card-name {
+    font-size: 1em;
+    text-align: center;
+    color:whitesmoke;
+}
+.card-image img{
+    max-width: 17em;
+    height: 20em !important;
+    border-radius:10px;
+    border:1px white solid;
+}
+
+.undisplayed-content{
+    display:none !important;
+}
+.displayed-content{
+    display:block;
+}
+
+.card.rotatein {
+    transform: rotateY(180deg)
+}
+
+.card-back{
+    transform:rotateY(180deg);
+    font-weight: 400;
+    font-size:1.2em;
+    padding:30px;
+    display:flex;
+    flex-direction: column;
+}
+
+.card-front{
+    opacity: 1;
+    height: 20em;
+    transition:  opacity ease-out 0.3s;
+    transition: height 0.3s ease-out;
+    transition-delay: 1s;
+    transition-property: height;         
+}
+
+
