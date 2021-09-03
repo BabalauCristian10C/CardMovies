@@ -1,12 +1,12 @@
-window.addEventListener("DOMContentLoaded",()=>{
+window.addEventListener("DOMContentLoaded", () => {
    'use strict';
    //get info from json file
    const getReq = () => {
       const req = new XMLHttpRequest();
 
-      req.addEventListener("readystatechange",() => {
-         if (req.readyState === 4 && req.status === 200 && req.getResponseHeader("content-type") === "application/json"){  
-            this.data = JSON.parse(req.responseText);     
+      req.addEventListener("readystatechange", () => {
+         if (req.readyState === 4 && req.status === 200 && req.getResponseHeader("content-type") === "application/json") {
+            this.data = JSON.parse(req.responseText);
          }
       })
 
@@ -15,12 +15,12 @@ window.addEventListener("DOMContentLoaded",()=>{
       req.send();
    }
    getReq();
-   const getImg = () =>{
+   const getImg = () => {
       const req = new XMLHttpRequest();
-      req.addEventListener("readystatechange",() => {
-         if (req.readyState === 4 && req.status === 200){  
-            this.imgLink = req.responseURL; 
-         } 
+      req.addEventListener("readystatechange", () => {
+         if (req.readyState === 4 && req.status === 200) {
+            this.imgLink = req.responseURL;
+         }
       })
       req.open("GET", "./dbHeroes/dbImage");
       req.setRequestHeader("Content-Type", "arraybuffer");
@@ -29,13 +29,14 @@ window.addEventListener("DOMContentLoaded",()=>{
    getImg();
    const preloader = document.querySelector(".preloaderPage")
    document.body.style.cssText = "overflow-y:hidden !important;"
-   function hide(delay = 100){
-         const hiding = setTimeout(()=>{
-            preloader.style.cssText = 'display:none; opacity:0';
-            clearTimeout(hiding);
-            document.body.style.cssText = "overflow-y:visible;"
-         }, delay);
-      }
+
+   function hide(delay = 100) {
+      const hiding = setTimeout(() => {
+         preloader.style.cssText = 'display:none; opacity:0';
+         clearTimeout(hiding);
+         document.body.style.cssText = "overflow-y:visible;"
+      }, delay);
+   }
 
    function display() {
       document.body.style.cssText = "overflow-y:hidden !important;"
@@ -48,49 +49,49 @@ window.addEventListener("DOMContentLoaded",()=>{
    //rotate the cart from front to back
    const rotateAnim = () => {
       const cards = document.querySelectorAll(".card");
-      const rotateinF = (target) =>{
+      const rotateinF = (target) => {
          const cardB = target.querySelector(".card-back"),
-               cardF = target.querySelector(".card-front");
+            cardF = target.querySelector(".card-front");
          target.classList.remove("rotatein");
          target.classList.add("rotateout");
-         setTimeout(()=>{
+         setTimeout(() => {
             cardB.classList.add("undisplayed-content");
             cardB.classList.remove("displayed-content");
             cardF.classList.remove("undisplayed-content");
             cardF.classList.add("displayed-content");
-         },250)   
+         }, 250)
       }
       const rotateoutF = (target) => {
          const cardB = target.querySelector(".card-back"),
-               cardF = target.querySelector(".card-front");
+            cardF = target.querySelector(".card-front");
          target.classList.remove("rotateout");
          target.classList.add("rotatein");
-         setTimeout(()=>{
+         setTimeout(() => {
             cardF.classList.add("undisplayed-content");
             cardF.classList.remove("displayed-content");
             cardB.classList.remove("undisplayed-content");
             cardB.classList.add("displayed-content");
-         },250)
+         }, 250)
       }
       window.addEventListener('click', (event) => {
          let target = event.target;
-         if (target.closest(".card")){
-            while(!target.matches(".card")){
+         if (target.closest(".card")) {
+            while (!target.matches(".card")) {
                target = target.offsetParent;
             }
-            if(target.classList.contains("rotatein")){
+            if (target.classList.contains("rotatein")) {
                rotateinF(target);
-            } else if(target.classList.contains("rotateout")){
+            } else if (target.classList.contains("rotateout")) {
                rotateoutF(target);
             }
          }
       })
    }
    rotateAnim();
-   
+
    //create cards with classes
    class card {
-      constructor(name,status,species,gender,bD,dD,movies,photo,realName, actors,citizenship){
+      constructor(name, status, species, gender, bD, dD, movies, photo, realName, actors, citizenship) {
          this.name = name;
          this.status = status;
          this.species = species;
@@ -98,18 +99,20 @@ window.addEventListener("DOMContentLoaded",()=>{
          this.gender = gender;
          this.deathDay = dD;
          this.movies = movies;
-         this.photo = photo.replace(/dbimage\/([\w\d%+.\s=-]*)\/?/i, (match, val1) => {return val1});;
+         this.photo = photo.replace(/dbimage\/([\w\d%+.\s=-]*)\/?/i, (match, val1) => {
+            return val1
+         });;
          this.realName = realName;
          this.actors = actors;
          this.citizenship = citizenship;
          this.htmlcode;
       }
 
-      testlog(){
+      testlog() {
          return this.photo
       }
 
-      createInside(workingPlatf, th){
+      createInside(workingPlatf, th) {
          const cardName = document.createElement('div'),
             cardPicture = document.createElement('div');
          cardName.classList.add("card-name");
@@ -119,22 +122,22 @@ window.addEventListener("DOMContentLoaded",()=>{
          workingPlatf.appendChild(cardName);
          workingPlatf.appendChild(cardPicture);
       }
-      createBack(workingPlatf,th){
+      createBack(workingPlatf, th) {
          const sName = document.createElement('span'),
-               sActors = document.createElement('span'),
-               sCitizenship = document.createElement('span'),
-               sGender = document.createElement('span'),
-               sMovies = document.createElement('span'),
-               sRealName = document.createElement('span'),
-               sStatus = document.createElement('span'),
-               sSpecies = document.createElement('span'),
-               sBirthDay = document.createElement('span'),
-               sDeathDay = document.createElement('span');
+            sActors = document.createElement('span'),
+            sCitizenship = document.createElement('span'),
+            sGender = document.createElement('span'),
+            sMovies = document.createElement('span'),
+            sRealName = document.createElement('span'),
+            sStatus = document.createElement('span'),
+            sSpecies = document.createElement('span'),
+            sBirthDay = document.createElement('span'),
+            sDeathDay = document.createElement('span');
          let moviess = '';
-         if (th.movies !== "unknown"){
-            th.movies.forEach((i)=>{
-               moviess+= i + " | ";
-            })   
+         if (th.movies !== "unknown") {
+            th.movies.forEach((i) => {
+               moviess += i + " | ";
+            })
          } else {
             moviess = 'No current Data';
          }
@@ -160,8 +163,8 @@ window.addEventListener("DOMContentLoaded",()=>{
          workingPlatf.append(sGender);
 
 
-      } 
-      createDiv(callback){
+      }
+      createDiv(callback) {
          const cover = document.createElement('div'), //col
             child1 = document.createElement('div'), //card
             child2dot1 = document.createElement('div'), //front card
@@ -171,54 +174,56 @@ window.addEventListener("DOMContentLoaded",()=>{
          child1.className = "card rotateout";
          child2dot1.className = "card-front displayed-content";
          child2dot2.className = "card-back undisplayed-content";
-         child1.id = this.name.toLowerCase().replace(/\s/,"");
+         child1.id = this.name.toLowerCase().replace(/\s/, "");
          child1.appendChild(child2dot1);
          child1.appendChild(child2dot2);
          cover.appendChild(child1);
 
          callback(child2dot1, this);
-         this.createBack(child2dot2,this);
+         this.createBack(child2dot2, this);
          this.htmlcode = cover;
       }
 
-      createItSelf(){
+      createItSelf() {
          this.createDiv(this.createInside)
       }
    }
-   
+
    let movieList = new Set(),
       cardList = new Array();
-   const createCard = (objact=data) => {
-          objact.forEach((val,key) => {
-             const {dD = "unknown", bD= "unknown",movies = "unknown",name = "unknown",actors = "unknown",realName = "unknown", photo = "unknown", species = "unknown",gender = "unknown", status = "unknown",citizenship = "unknown"} = val;
-             if(movies!=="unknown"){
-               movies.forEach((i)=>{
-                  movieList.add(i)
-               })
-             }
+   const createCard = (objact = data) => {
+      objact.forEach((val, key) => {
+         const {
+            dD = "unknown", bD = "unknown", movies = "unknown", name = "unknown", actors = "unknown", realName = "unknown", photo = "unknown", species = "unknown", gender = "unknown", status = "unknown", citizenship = "unknown"
+         } = val;
+         if (movies !== "unknown") {
+            movies.forEach((i) => {
+               movieList.add(i)
+            })
+         }
 
-             const cardN = new card(name,status,species,gender,bD,dD,movies,photo,realName, actors,citizenship);
-             cardN.createItSelf();
+         const cardN = new card(name, status, species, gender, bD, dD, movies, photo, realName, actors, citizenship);
+         cardN.createItSelf();
 
-             cardList.push(cardN);
-          })
-       }
+         cardList.push(cardN);
+      })
+   }
 
    setTimeout(createCard, 2000)
    //display card function
 
-   const displayCard = (filter="default") =>{
+   const displayCard = (filter = "default") => {
       const place = document.getElementsByClassName("row")[1];
-      if(filter === "default"){
-         cardList.forEach((i)=>{
+      if (filter === "default") {
+         cardList.forEach((i) => {
             place.append(i.htmlcode)
          })
-      } else if (filter !== "None"){
-         place.innerHTML= ""
-         cardList.forEach((i)=>{
-            if(i.movies!=="unknown"){
-               i.movies.forEach((movie)=>{
-                  if(movie === filter){
+      } else if (filter !== "None") {
+         place.innerHTML = ""
+         cardList.forEach((i) => {
+            if (i.movies !== "unknown") {
+               i.movies.forEach((movie) => {
+                  if (movie === filter) {
                      place.append(i.htmlcode)
                   }
                })
@@ -232,16 +237,16 @@ window.addEventListener("DOMContentLoaded",()=>{
 
    //filter function 
 
-   const filtering = () =>{
+   const filtering = () => {
       const selectingModule = document.querySelector("#movie");
-      movieList.forEach((item)=>{
+      movieList.forEach((item) => {
          const el = document.createElement('option');
          el.textContent = item;
          el.value = item;
          selectingModule.append(el);
       })
 
-      selectingModule.addEventListener('change', (e)=>{
+      selectingModule.addEventListener('change', (e) => {
          const target = e.target.value;
          display();
          hide(1000);
